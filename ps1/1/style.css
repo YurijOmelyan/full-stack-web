@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  font-size: 4rem;
+  color: white;
+  font-weight: bold;
+  font-family: Helvetica;
+  text-align: center;
+  padding: 1rem;
+}
+
+.floats {
+  overflow: hidden;
+}
+
+/* my implementation   */
+.floats .column {
+  float: left;
+  width: calc(100% / 3);
+}
+
+.blocks{
+  font-size: 0;
+}
+
+.blocks .column {
+  display: inline-block;
+  width: calc(100% / 3);
+}
+
+.flexbox {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.flexbox .column {
+  flex-grow: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+/**/

@@ -5,61 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Test page</title>
-  <style media="screen">
-    body {
-      margin: 0;
-    }
-    
-    * {
-      box-sizing: border-box;
-    }
-    
-    .column {
-      font-size: 4rem;
-      color: white;
-      font-weight: bold;
-      font-family: Helvetica;
-      text-align: center;
-      padding: 1rem;
-    }
-    
-    .floats {
-      overflow: hidden;
-    }
-
-/* my implementation   */
-    .floats .column {
-      float: left;
-      width: 33.33%;
-    }
-
-    .blocks{
-      font-size: 0px;
-    }
-
-    .blocks .column{
-      display: inline-block;
-      width: 33.33%;
-    }
-
-    .flexbox {
-      display: flex;
-      justify-content: space-around;
-
-    }
-    
-    .flexbox .column{
-      flex-basis: 33.33%;
-    }
-   
-    .grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-/**/
-    
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <section class="floats">
