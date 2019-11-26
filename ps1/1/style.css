@@ -20,12 +20,24 @@ body {
 }
 
 /* my implementation   */
-.floats .column {
+.floats__column-first {
+  background-color: #1abc9c;
+}
+
+.floats__column-second {
+  background-color: #2ecc71;
+}
+
+.floats__column-third {
+  background-color: #3498db;
+}
+
+.floats > div {
   float: left;
   width: calc(100% / 3);
 }
 
-.blocks{
+.blocks {
   font-size: 0;
 }
 
@@ -34,19 +46,51 @@ body {
   width: calc(100% / 3);
 }
 
+.blocks__column-first {
+  background-color: #f39c12;
+}
+
+.blocks__column-second {
+  background-color: #d35400;
+}
+
+.blocks__column-third {
+  background-color: #c0392b;
+}
+
 .flexbox {
   display: flex;
-  justify-content: space-around;
-
 }
 
 .flexbox .column {
   flex-grow: 1;
 }
 
+.flexbox__column-first {
+  background-color: #16a085;
+}
+
+.flexbox__column-second {
+  background-color: #27ae60;
+}
+
+.flexbox__column-third {
+  background-color: #2980b9;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, auto);
 }
 
-/**/
+.grid__column-first {
+  background-color: #f1c40f;
+}
+
+.grid__column-second {
+  background-color: #e67e22;
+}
+
+.grid__column-third {
+  background-color: #e74c3c;
+}
+  
