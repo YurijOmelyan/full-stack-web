@@ -1,0 +1,11 @@
+#sortingByCategories:hover,
+#sortByName:hover {
+  background: #b1faf4;
+  cursor: pointer;
+}
+
+#sortingByCategories:active,
+#sortByName:active {
+  background: #92ffc9;
+  cursor: pointer;
+}

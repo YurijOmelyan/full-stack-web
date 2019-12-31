@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Table task</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="container" style="margin-top: 2rem">
+    <h2 class="title is-2">PS2 JS+RegExp</h2>
+    <h4 class="subtitle is-4">Table task</h4>
+    <nav class="panel" style="width: 600px;">
+      <h class="panel-heading">
+        Customer's Bill
+      </h>
+      <div class="panel-block">
+        <div class="field is-horizontal" style="width: 100%">
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input id="inputName" class="input" type="text" placeholder="Search by name">
+              </p>
+            </div>
+            <div class="field">
+              <p class="control">
+                <div class="select" style="width: 100%">
+                  <select id="selectCategory" placeholder="Filter by category" style="width: 100%">
+                    <option value="" selected>Filter by category</option>
+                    <option value="supplies">Office supplies</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-block">
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th id="sortingByCategories">Category ▼</th>
+              <th id="sortByName">Name ▼</th>
+              <th>Amount</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+           <tbody>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Total:</th>
+              <th>45$</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </nav>
+  </section>
+  
+  <script  src="main.js" type="text/javascript">
+    
+  </script>
+</body>
+</html>
