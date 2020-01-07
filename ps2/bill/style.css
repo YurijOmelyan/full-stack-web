@@ -9,3 +9,7 @@
   background: #92ffc9;
   cursor: pointer;
 }
+
+.hide--block {
+  display: none;
+}

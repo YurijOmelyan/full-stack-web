@@ -38,7 +38,8 @@ const GOODS = [
 ];
 
 const doc = document;
-showData(GOODS);
+let filteredArray = GOODS;
+showData(filteredArray);
 
 function showData(arr) {
   let dataTable = "";
@@ -55,38 +56,52 @@ function showData(arr) {
 }
 
 function getOrderValue() {
-  const price = doc.querySelectorAll(".price");
+  const price = doc.querySelectorAll("tbody>tr");
   let sum = 0;
-  price.forEach(element => {
-    sum += Number(element.textContent);
+  price.forEach(node => {
+    sum +=
+      Number(node.querySelector(".amount").textContent) *
+      Number(node.querySelector(".price").textContent);
   });
   doc.querySelector("tfoot>tr").lastElementChild.textContent = `${sum}$`;
 }
 
 let checksCategories = true;
 doc.getElementById("sortingByCategories").onclick = function() {
-  const newArr = GOODS.sort((a, b) => {
+  const newArr = filteredArray.sort((a, b) => {
     return a.category > b.category ? 1 : -1;
   });
+  nameMin.className = "hide--block";
+  nameMax.className = "hide--block";
   if (checksCategories) {
     checksCategories = false;
+    categoryMin.className = "hide--block";
+    categoryMax.className = "";
     showData(newArr);
   } else {
     checksCategories = true;
+    categoryMin.className = "";
+    categoryMax.className = "hide--block";
     showData(newArr.reverse());
   }
 };
 
 let checksName = true;
 doc.getElementById("sortByName").onclick = function() {
-  const newArr = GOODS.sort((a, b) => {
+  const newArr = filteredArray.sort((a, b) => {
     return a.name > b.name ? 1 : -1;
   });
+  categoryMin.className = "hide--block";
+  categoryMax.className = "hide--block";
   if (checksName) {
     checksName = false;
+    nameMin.className = "hide--block";
+    nameMax.className = "";
     showData(newArr);
   } else {
     checksName = true;
+    nameMin.className = "";
+    nameMax.className = "hide--block";
     showData(newArr.reverse());
   }
 };
@@ -104,11 +119,22 @@ function filterArr(obj, value, property) {
 doc.getElementById("inputName").oninput = function() {
   doc.getElementById("selectCategory").selectedIndex = 0;
   const enteredName = doc.getElementById("inputName").value;
-  showData(filterArr(GOODS, enteredName, "name"));
+  filteredArray = filterArr(GOODS, enteredName, "name");
+  showData(filteredArray);
+  showBloks();
 };
 
 doc.getElementById("selectCategory").onchange = function() {
   doc.getElementById("inputName").value = "";
   const valueCategory = doc.getElementById("selectCategory").value;
-  showData(filterArr(GOODS, valueCategory, "category"));
+  filteredArray = filterArr(GOODS, valueCategory, "category");
+  showData(filteredArray);
+  showBloks();
 };
+
+function showBloks() {
+  categoryMin.className = "block";
+  categoryMax.className = "block";
+  nameMin.className = "block";
+  nameMax.className = "block";
+}

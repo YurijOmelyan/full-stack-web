@@ -19,31 +19,39 @@ doc.getElementById("buttonTaskFirst").onclick = function() {
   conteinerResult.style.visibility = "visible";
   nameTask.textContent = doc.querySelector("#taskFirst h3").innerText;
 
-  const regex = /^[-\d]\d+$/gm;
-  if (!regex.test(firstNumber) && !regex.test(secondNumber)) {
-    doc.getElementById("message").innerText =
-      "Enter two numbers from -100 to 100!";
-  } else {
-    let sum = 0;
-    for (let number = firstNumber; number <= secondNumber; number++) {
-      if (
-        Math.abs(number) % 10 === 2 ||
-        Math.abs(number) % 10 === 3 ||
-        Math.abs(number) % 10 === 7
-      ) {
-        sum += number;
-      }
-    }
+  const regex = /^(-\d+)|(\d+)$/;
 
-    doc.getElementById("message").innerText =
-      " You entered the first number: " +
+  if (!regex.test(firstNumber)) {
+    showResult("Enter two numbers from -100 to 100!", "");
+    return;
+  }
+
+  if (!regex.test(secondNumber)) {
+    showResult("Enter two numbers from -100 to 100!", "");
+    return;
+  }
+
+  let sum = 0;
+  for (
+    let number = Math.min(firstNumber, secondNumber);
+    number <= Math.max(firstNumber, secondNumber);
+    number++
+  ) {
+    if (
+      Math.abs(number) % 10 === 2 ||
+      Math.abs(number) % 10 === 3 ||
+      Math.abs(number) % 10 === 7
+    ) {
+      sum += number;
+    }
+  }
+  showResult(
+    " You entered the first number: " +
       firstNumber +
       " and the second: " +
-      secondNumber;
-
-    doc.getElementById("result").innerText =
-      "The result of the calculation: " + sum;
-  }
+      secondNumber,
+    "The result of the calculation: " + sum
+  );
 };
 
 /*Task 2-1*/
@@ -55,7 +63,7 @@ doc.getElementById("buttonFirstTaskSecond").onclick = function() {
 
   const regex = /^\d+$/g;
   if (!regex.test(timeInSeconds)) {
-    doc.getElementById("message").innerText = "Enter the number of seconds";
+    showResult("Enter the number of seconds", "");
     return;
   }
   let hour = getNumberOccurrences(timeInSeconds, secondsInOneHour);
@@ -71,10 +79,10 @@ doc.getElementById("buttonFirstTaskSecond").onclick = function() {
     (minute < 10 ? "0" + minute : minute) +
     ":" +
     (seconds < 10 ? "0" + seconds : seconds);
-  doc.getElementById("message").innerText =
-    "You entered the " + timeInSeconds + " seconds.";
-  doc.getElementById("result").innerText =
-    "The result of the calculation: " + time;
+  showResult(
+    "You entered the " + timeInSeconds + " seconds.",
+    "The result of the calculation: " + time
+  );
 };
 
 function getNumberOccurrences(number, multiplicity) {
@@ -94,19 +102,18 @@ doc.getElementById("buttonSecondTaskSecond").onclick = function() {
 
   const regex = /^([01]\d|2[0-3]):[0-5]\d:\d\d$/g;
   if (!regex.test(time)) {
-    doc.getElementById("message").innerText =
-      "Enter the time in the form: hh:mm:ss";
+    showResult("Enter the time in the form: hh:mm:ss", "");
     return;
   }
 
   let hour = Number(time.match(/^[01]\d|2[0-3](?=:)/g)[0]);
   let minute = Number(time.match(/(?<=:)[0-5]\d(?=:)/g)[0]);
   let seconds = Number(time.match(/(?<=:)[0-5]\d$/gm)[0]);
-
-  doc.getElementById("message").innerText = "You entered " + time + " time.";
-  doc.getElementById("result").innerText =
+  showResult(
+    "You entered " + time + " time.",
     "The result of the calculation: " +
-    (hour * secondsInOneHour + minute * secondsInOneMinute + seconds);
+      (hour * secondsInOneHour + minute * secondsInOneMinute + seconds)
+  );
 };
 
 /*Task 3*/
@@ -119,8 +126,7 @@ doc.getElementById("buttonTaskThree").onclick = function() {
   const regex = /^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/gm;
 
   if (!regex.test(firstDateTime) && !regex.test(secondDateTime)) {
-    doc.getElementById("message").innerText =
-      "The date and time are not correctly entered!";
+    showResult("The date and time are not correctly entered!", "");
     return;
   }
 
@@ -128,6 +134,7 @@ doc.getElementById("buttonTaskThree").onclick = function() {
     (new Date(firstDateTime) - new Date(secondDateTime)) / millisecondsInSecond
   );
 
+  console.log(dateDiffInSeconds);
   let secondsInDay = secondsInOneMinute * minutesInHour * hourInDay;
   let secondsInMonth = secondsInDay * dayInMonth;
   let secondsInYear = secondsInMonth * monthsInYear;
@@ -166,14 +173,13 @@ doc.getElementById("buttonTaskThree").onclick = function() {
       ? Math.floor(dateDiffInSeconds / secondsInOneMinute)
       : 0;
 
-  doc.getElementById(
-    "message"
-  ).innerText = `You entered the first date: ${firstDateTime}
-    and the second date: ${secondDateTime}`;
-
-  doc.getElementById("result").innerText = `The result of the calculation: 
+  showResult(
+    `You entered the first date: ${firstDateTime}
+    and the second date: ${secondDateTime}`,
+    `The result of the calculation: 
   ${year} year(s), ${month} month(s), ${days} day(s), ${hour} hour(s), ${minute} minute(s), ${(dateDiffInSeconds -=
-    minute * secondsInOneMinute)} second(s)`;
+      minute * secondsInOneMinute)} second(s)`
+  );
 };
 
 /* Task 4 */
@@ -184,12 +190,14 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   const regex = /^([1-9]\d*)\*([1-9]\d*)$/gm;
 
   if (!regex.test(sizeBoard)) {
-    doc.getElementById("message").innerText =
-      "Enter the size of the board according to the template.The date and time are not correctly entered!";
+    showResult(
+      "Enter the size of the board according to the template. " +
+        "The date and time are not correctly entered!",
+      ""
+    );
     return;
   }
   const row = Number(sizeBoard.match(/^([1-9]\d*)(?=\*)/gm)[0]);
-
   const colum = Number(sizeBoard.match(/(?<=\*)([1-9]\d*)$/gm)[0]);
   const height = doc.documentElement.clientHeight - 200;
   const width = doc.documentElement.clientWidth - 200;
@@ -207,8 +215,7 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   }
   chessBoard += `</div>`;
 
-  doc.getElementById("message").innerText = `Checkerboard Size: ${sizeBoard}`;
-  doc.getElementById("result").innerHTML = chessBoard;
+  showResult(`Checkerboard Size: ${sizeBoard}`, chessBoard);
 };
 
 /* Task 5 */
@@ -216,26 +223,38 @@ textAreaTaskFive.addEventListener("blur", () => {
   conteinerResult.style.visibility = "visible";
   nameTask.textContent = doc.querySelector("#taskFive h3").innerText;
   const text = doc.getElementById("textAreaTaskFive").value;
-  const regLink = /(?<=http[s]*:\/{2})(w{3})?.+\..+(?=(,|$))/g;
-  const regIp = /((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)(?=($|,))/gm;
+  const regLink = /((?<=http[s]*:\/{2})((w{3})?.[^,]+))|((w{3}).[^,]+)/g;
+  const regIp = /(?<=\s|^)((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)(?=($|,))/g;
+  const regIp6 = /((^|:|(?<=\s))([0-9a-fA-F]{0,4})){1,8}(?=($|,))/g;
 
-  if (!regLink.test(text) || !regIp.test(text)) {
-    doc.getElementById("message").innerText = "No data to select.";
-    return;
-  }
   const arrLink = text.match(regLink);
   const arrIp = text.match(regIp);
-  let list = `<ol class="list">`;
-  arrIp.forEach(element => {
-    list += `<li><a href="">${element}</a></li>`;
-  });
-  arrLink.forEach(element => {
-    list += `<li><a href="">${element}</a></li>`;
-  });
+  const arrIp6 = text.match(regIp6);
 
+  if (arrLink == null && arrIp == null && arrIp6 == null) {
+    showResult("No data to select.", "");
+    return;
+  }
+
+  let list = `<ol class="list">`;
+  if (arrLink != null) {
+    arrLink.forEach(element => {
+      list += `<li><a href="">${element}</a></li>`;
+    });
+  }
+  if (arrIp != null) {
+    arrIp.forEach(element => {
+      list += `<li><a href="">${element}</a></li>`;
+    });
+  }
+  if (arrIp6 != null) {
+    arrIp6.forEach(element => {
+      list += `<li><a href="">${element}</a></li>`;
+    });
+  }
   list += `</ol>`;
-  doc.getElementById("message").innerText = `List of links and ip addresses:`;
-  doc.getElementById("result").innerHTML = list;
+
+  showResult(`List of links and ip addresses:`, list);
 });
 
 /* Task 6 */
@@ -252,19 +271,27 @@ doc.getElementById("buttonTaskSixth").onclick = function() {
   );
 
   arr.forEach(element => {
-    console.log(element);
-    console.log(text);
     text = text.replace(
       new RegExp(`(?<!(<mark>))${element}(?!</mark>)`, "g"),
       `<mark>${element}</mark>`
     );
   });
-
-  doc.getElementById("message").innerText = ` `;
-  doc.getElementById("result").innerHTML = text;
+  showResult(` `, text);
 };
 
 /*Close result*/
 doc.getElementById("close").onclick = function() {
   conteinerResult.style.visibility = "hidden";
 };
+
+/**Show result */
+
+function showResult(message, result) {
+  doc.getElementById("message").innerText = message;
+
+  if (result.length == 0) {
+    doc.getElementById("result").innerHTML = "";
+    return;
+  }
+  doc.getElementById("result").innerHTML = result;
+}
