@@ -199,9 +199,9 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   }
   const row = Number(sizeBoard.match(/^([1-9]\d*)(?=\*)/gm)[0]);
   const colum = Number(sizeBoard.match(/(?<=\*)([1-9]\d*)$/gm)[0]);
-  const height = doc.documentElement.clientHeight - 200;
-  const width = doc.documentElement.clientWidth - 200;
-  const sizeCell = height > width ? width / colum : height / row;
+  const width = doc.documentElement.clientWidth - 100;
+  const height = doc.documentElement.clientHeight - 300;
+  const sizeCell = Math.min(width / colum, height / row);
 
   let chessBoard = `<div class="chessBoard">`;
   for (let r = 0; r < row; r++) {
@@ -239,17 +239,17 @@ textAreaTaskFive.addEventListener("blur", () => {
   let list = `<ol class="list">`;
   if (arrLink != null) {
     arrLink.forEach(element => {
-      list += `<li><a href="">${element}</a></li>`;
+      list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
   if (arrIp != null) {
     arrIp.forEach(element => {
-      list += `<li><a href="">${element}</a></li>`;
+      list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
   if (arrIp6 != null) {
     arrIp6.forEach(element => {
-      list += `<li><a href="">${element}</a></li>`;
+      list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
   list += `</ol>`;
@@ -264,6 +264,14 @@ doc.getElementById("buttonTaskSixth").onclick = function() {
 
   let text = doc.getElementById("textArea-taskSixth").value;
   const regex = doc.getElementById("input-TaskSixth").value;
+  if (text == "") {
+    showResult("No data to process.", "");
+    return;
+  }
+  if (regex == "") {
+    showResult("No regex", "");
+    return;
+  }
   const arr = new Set(
     text.match(new RegExp(regex, "g")).sort(function(a, b) {
       return b - a;
