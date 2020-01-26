@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Landing page</title>
+  </head>
+
+  <body>
+    <a id="button">Up</a>
+    <div class="page flex-box flex-column">
+      <div class="header page__header flex-box">
+        <div>
+          <label class="logo"> N <span>++</span> </label>
+        </div>
+        <div id="menu" class="menu  flex-box">
+          <a class="menu__button  flex-box" href="#block-welcome">PRODUCTS</a>
+          <a class="menu__button  flex-box" href="#block-selection">ABOUT US</a>
+          <a class="menu__button  flex-box" href="#block-input">CONTACT US</a>
+        </div>
+      </div>
+
+      <div id="block-welcome" class="block-welcome  flex-box bg-color">
+        <div class="block-welcome__foto  flex-box">
+          <img src="imgs\iphone.png" alt="foto" />
+        </div>
+        <div class="block-welcome__text  flex-box flex-column">
+          <h3 class="heading">Our awesome app is ready to use!</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati,
+            temporibus! Ratione, quam quos illum, suscipit molestiae sapiente
+            pariatur nam dolor aut deleniti sint at itaque aliquid, inventore.
+          </p>
+
+          <input type="submit" class="style-button" value="Buy now!" />
+        </div>
+      </div>
+
+      <div id="block-selection" class="block-selection  flex-box">
+        <div class="block-selection__button  flex-box flex-column">
+          <p class="font-awesome  flex-box bg-color">
+            <i class="fa fa-code fa-2x" aria-hidden="true"></i>
+          </p>
+          <p class="block-selection__header">Web development</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
+            veritatis ipsa maxime voluptas temporibus, blanditiis accusamus
+            reprehenderit inventore, sit consectetur id dolorum omnis suscipit
+            harum. Impedit, reiciendis.
+          </p>
+        </div>
+        <div class="block-selection__button  flex-box flex-column">
+          <p class="font-awesome  flex-box bg-color">
+            <i class="fa fa-android fa-2x" aria-hidden="true"></i>
+          </p>
+          <p class="block-selection__header">Mobile development</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
+            veritatis ipsa maxime voluptas temporibus, blanditiis accusamus
+            reprehenderit inventore, sit consectetur id dolorum omnis suscipit
+            harum. Impedit, reiciendis.
+          </p>
+        </div>
+        <div class="block-selection__button  flex-box flex-column">
+          <p class="font-awesome  flex-box bg-color">
+            <i class="fa fa-cloud fa-2x" aria-hidden="true"></i>
+          </p>
+          <p class="block-selection__header">Hightload</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
+            veritatis ipsa maxime voluptas temporibus, blanditiis accusamus
+            reprehenderit inventore, sit consectetur id dolorum omnis suscipit
+            harum. Impedit, reiciendis.
+          </p>
+        </div>
+      </div>
+
+      <div id="block-input" class="block-input  flex-box flex-column bg-color">
+        <div class="block-input__message">
+          <h3 class="heading">Contact us!</h3>
+        </div>
+        <div class="block-input__input-dialog  flex-box flex-column">
+          <input
+            type="text"
+            class="input-box inp_name"
+            placeholder="Type here your name, please"
+          />
+          <input
+            type="email"
+            class="input-box inp_mail"
+            placeholder="Type here your email, please"
+          />
+          <input
+            type="tel"
+            class="input-box inp_phone"
+            placeholder="Type here your phone, please"
+          />
+          <textarea
+            class="input-box inp_question"
+            cols="30"
+            rows="10"
+            placeholder="Ask your questoin"
+          ></textarea>
+          <form>
+            <input id="checkbox" type="checkbox" />
+            <label for="checkbox">Click</label>
+          </form>
+          <form>
+            <label>Are you a bot?</label>
+            <input id="yes" type="radio" /><label for="yes">Yes</label>
+            <input id="not" type="radio" /><label for="not">Not</label>
+          </form>
+          <form>
+            <label>Choose a color:</label>
+            <input type="color" />
+          </form>
+          <form>
+            <label for="date">Date of Birth</label>
+            <input id="date" type="date" />
+          </form>
+          <form>
+            <label for="datetime">Enter date and time </label>
+            <input id="datetime" type="datetime-local" />
+          </form>
+          <form>
+            <label for="file">Select a file </label>
+            <input id="file" type="file" />
+            <input type="hidden" />
+            <input type="image" src="imgs\iphone.png" />
+          </form>
+          <form action="">
+            <label for="month">Enter month</label>
+            <input id="month" type="month" />
+            <label for="week"> Enter week</label>
+            <input id="week" type="week" name="year_week" />
+            <label for="time"> Enter time</label>
+            <input id="time" type="time" />
+          </form>
+          <form>
+            <label for="number">How old are you</label>
+            <input id="number" type="number" />
+          </form>
+          <form>
+            <label for="password">Enter password</label>
+            <input id="password" type="password" />
+          </form>
+          <form>
+            <label for="url">Enter homepage</label>
+            <input id="url" type="url" />
+          </form>
+          <form>
+            <label for="search">Search line </label>
+            <input id="search" type="search" />
+          </form>
+          <form action="">
+            <label for="range">Choose scale </label>
+            <input id="range" type="range" />
+          </form>
+          <form action="">
+            <input type="reset" />
+            <input type="button" value="Save" />
+          </form>
+        </div>
+        <div class="block-input__button-send">
+          <input type="submit" class="style-button" value="Send email!" />
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
