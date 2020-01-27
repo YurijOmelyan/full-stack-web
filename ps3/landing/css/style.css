@@ -180,8 +180,11 @@ input[type="image"] {
   right: 50px;
   visibility: hidden;
   cursor: pointer;
+  opacity: 0;
+  transition: 1s opacity, 1s visibility;
 }
 
 #button.show {
+  opacity: 1;
   visibility: visible;
 }

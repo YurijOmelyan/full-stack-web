@@ -22,7 +22,7 @@ function fillDropdownList() {
   let optionSelect = "";
   arrUser.forEach(function(el) {
     optionSelect += option;
-    optionSelect += `<img src="/ps3/select/img/avatar/${el.avatar}" class="avatar side--indent" ></img>`;
+    optionSelect += `<img src="img/avatar/${el.avatar}" class="avatar side--indent" alt="${el.name}" />`;
     optionSelect += `<div class="user--name side--indent">${el.name}</div>`;
     optionSelect += `</div>`;
   });
@@ -34,9 +34,7 @@ function dropdownSelect() {
   $("#dropDownSelect").slideToggle("slow");
   $("#imgButton").attr(
     "src",
-    `/ps3/select/img/icon/${
-      $("#dropdown").hasClass("open") ? "low" : "row"
-    }.png`
+    `img/icon/${$("#dropdown").hasClass("open") ? "low" : "row"}.png`
   );
   $("#dropdown").toggleClass("open");
 }
