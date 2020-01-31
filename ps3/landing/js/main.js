@@ -1,5 +1,5 @@
 const OFFSET_TOP = 100;
-const ANIMATION_TIME = "300";
+const ANIMATION_TIME = 300;
 
 $(document).ready(function() {
   const btn = $("#button");
@@ -12,7 +12,7 @@ $(document).ready(function() {
   });
 
   btn.on("click", function(e) {
-    $("html, body").animate({ scrollTop: 0 }, ANIMATION_TIME);
+    $("html").animate({ scrollTop: 0 }, ANIMATION_TIME);
   });
 
   $("#menu").on("click", ".menu__button", function(event) {
