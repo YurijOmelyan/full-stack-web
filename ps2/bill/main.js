@@ -39,6 +39,11 @@ const GOODS = [
 
 const doc = document;
 let filteredArray = GOODS;
+const hideBlock = "hide--block";
+const block = "block";
+const selectCategory = "selectCategory";
+const inputName = "inputName";
+
 showData(filteredArray);
 
 function showData(arr) {
@@ -71,17 +76,17 @@ doc.getElementById("sortingByCategories").onclick = function() {
   const newArr = filteredArray.sort((a, b) => {
     return a.category > b.category ? 1 : -1;
   });
-  nameMin.className = "hide--block";
-  nameMax.className = "hide--block";
+  nameMin.className = hideBlock;
+  nameMax.className = hideBlock;
   if (checksCategories) {
     checksCategories = false;
-    categoryMin.className = "hide--block";
+    categoryMin.className = hideBlock;
     categoryMax.className = "";
     showData(newArr);
   } else {
     checksCategories = true;
     categoryMin.className = "";
-    categoryMax.className = "hide--block";
+    categoryMax.className = hideBlock;
     showData(newArr.reverse());
   }
 };
@@ -91,17 +96,17 @@ doc.getElementById("sortByName").onclick = function() {
   const newArr = filteredArray.sort((a, b) => {
     return a.name > b.name ? 1 : -1;
   });
-  categoryMin.className = "hide--block";
-  categoryMax.className = "hide--block";
+  categoryMin.className = hideBlock;
+  categoryMax.className = hideBlock;
   if (checksName) {
     checksName = false;
-    nameMin.className = "hide--block";
+    nameMin.className = hideBlock;
     nameMax.className = "";
     showData(newArr);
   } else {
     checksName = true;
     nameMin.className = "";
-    nameMax.className = "hide--block";
+    nameMax.className = hideBlock;
     showData(newArr.reverse());
   }
 };
@@ -116,25 +121,39 @@ function filterArr(obj, value, property) {
   });
 }
 
-doc.getElementById("inputName").oninput = function() {
-  doc.getElementById("selectCategory").selectedIndex = 0;
-  const enteredName = doc.getElementById("inputName").value;
-  filteredArray = filterArr(GOODS, enteredName, "name");
+doc.getElementById(inputName).oninput = function() {
+  const enteredName = doc.getElementById(inputName).value;
+  const valueCategory = doc.getElementById(selectCategory).value;
+
+  filteredArray = filterArr(
+    valueCategory.length > 0
+      ? filterArr(GOODS, valueCategory, "category")
+      : GOODS,
+    enteredName,
+    "name"
+  );
+
   showData(filteredArray);
   showBloks();
 };
 
-doc.getElementById("selectCategory").onchange = function() {
-  doc.getElementById("inputName").value = "";
-  const valueCategory = doc.getElementById("selectCategory").value;
-  filteredArray = filterArr(GOODS, valueCategory, "category");
+doc.getElementById(selectCategory).onchange = function() {
+  const valueCategory = doc.getElementById(selectCategory).value;
+  const enteredName = doc.getElementById(inputName).value;
+
+  filteredArray = filterArr(
+    enteredName.length > 0 ? filterArr(GOODS, enteredName, "name") : GOODS,
+    valueCategory,
+    "category"
+  );
+
   showData(filteredArray);
   showBloks();
 };
 
 function showBloks() {
-  categoryMin.className = "block";
-  categoryMax.className = "block";
-  nameMin.className = "block";
-  nameMax.className = "block";
+  categoryMin.className = block;
+  categoryMax.className = block;
+  nameMin.className = block;
+  nameMax.className = block;
 }

@@ -4,7 +4,7 @@ const secondsInOneHour = 3600;
 const secondsInOneMinute = 60;
 const minutesInHour = 60;
 const hourInDay = 24;
-const dayInMonth = 30.41;
+const dayInMonth = 30;
 const monthsInYear = 12;
 
 const doc = document;
@@ -21,12 +21,7 @@ doc.getElementById("buttonTaskFirst").onclick = function() {
 
   const regex = /^(-\d+)|(\d+)$/;
 
-  if (!regex.test(firstNumber)) {
-    showResult("Enter two numbers from -100 to 100!", "");
-    return;
-  }
-
-  if (!regex.test(secondNumber)) {
+  if (!regex.test(firstNumber) || !regex.test(secondNumber)) {
     showResult("Enter two numbers from -100 to 100!", "");
     return;
   }
@@ -37,20 +32,18 @@ doc.getElementById("buttonTaskFirst").onclick = function() {
     number <= Math.max(firstNumber, secondNumber);
     number++
   ) {
+    const remainderDivision = Math.abs(number) % 10;
     if (
-      Math.abs(number) % 10 === 2 ||
-      Math.abs(number) % 10 === 3 ||
-      Math.abs(number) % 10 === 7
+      remainderDivision === 2 ||
+      remainderDivision === 3 ||
+      remainderDivision === 7
     ) {
       sum += number;
     }
   }
   showResult(
-    " You entered the first number: " +
-      firstNumber +
-      " and the second: " +
-      secondNumber,
-    "The result of the calculation: " + sum
+    `You entered the first number: ${firstNumber} and the second: ${secondNumber}`,
+    `The result of the calculation: ${sum}`
   );
 };
 
@@ -66,27 +59,27 @@ doc.getElementById("buttonFirstTaskSecond").onclick = function() {
     showResult("Enter the number of seconds", "");
     return;
   }
-  let hour = getNumberOccurrences(timeInSeconds, secondsInOneHour);
-  let minute = getNumberOccurrences(
+  const hour = getNumberOccurrences(timeInSeconds, secondsInOneHour);
+  const minute = getNumberOccurrences(
     timeInSeconds - hour * secondsInOneHour,
     secondsInOneMinute
   );
-  let seconds =
+  const seconds =
     timeInSeconds - hour * secondsInOneHour - minute * secondsInOneMinute;
-  let time =
+  const time =
     (hour < 10 ? "0" + hour : hour) +
     ":" +
     (minute < 10 ? "0" + minute : minute) +
     ":" +
     (seconds < 10 ? "0" + seconds : seconds);
   showResult(
-    "You entered the " + timeInSeconds + " seconds.",
-    "The result of the calculation: " + time
+    `You entered the ${timeInSeconds} seconds.`,
+    `The result of the calculation: ${time}`
   );
 };
 
 function getNumberOccurrences(number, multiplicity) {
-  let count = 0;
+  const count = 0;
   while (number >= multiplicity) {
     number -= multiplicity;
     count++;
@@ -106,9 +99,9 @@ doc.getElementById("buttonSecondTaskSecond").onclick = function() {
     return;
   }
 
-  let hour = Number(time.match(/^[01]\d|2[0-3](?=:)/g)[0]);
-  let minute = Number(time.match(/(?<=:)[0-5]\d(?=:)/g)[0]);
-  let seconds = Number(time.match(/(?<=:)[0-5]\d$/gm)[0]);
+  const hour = Number(time.match(/^[01]\d|2[0-3](?=:)/g)[0]);
+  const minute = Number(time.match(/(?<=:)[0-5]\d(?=:)/g)[0]);
+  const seconds = Number(time.match(/(?<=:)[0-5]\d$/gm)[0]);
   showResult(
     "You entered " + time + " time.",
     "The result of the calculation: " +
@@ -129,56 +122,63 @@ doc.getElementById("buttonTaskThree").onclick = function() {
     showResult("The date and time are not correctly entered!", "");
     return;
   }
+  const firstDate = new Date(firstDateTime);
+  const secondDate = new Date(secondDateTime);
+  if (firstDate < secondDate) {
+    [firstDate, secondDate] = [secondDate, firstDate];
+  }
 
-  let dateDiffInSeconds = Math.abs(
-    (new Date(firstDateTime) - new Date(secondDateTime)) / millisecondsInSecond
+  const resultDate = [];
+
+  function getDate(first, second, coefficient, index) {
+    if (first >= second) {
+      return { value: Math.abs(first - second), coeff: coefficient };
+    } else {
+      if (resultDate[index].value === 0) {
+        let i = index;
+        do {
+          resultDate[i].value += resultDate[i].coeff;
+          resultDate[i - 1].value -= 1;
+          i--;
+        } while (resultDate[i].value <= 0);
+      }
+      resultDate[index].value -= 1;
+
+      return {
+        value: Math.abs(first + coefficient - second),
+        coeff: coefficient
+      };
+    }
+  }
+  //year
+  resultDate.push(
+    getDate(firstDate.getFullYear(), secondDate.getFullYear(), 0, -1)
   );
-
-  console.log(dateDiffInSeconds);
-  let secondsInDay = secondsInOneMinute * minutesInHour * hourInDay;
-  let secondsInMonth = secondsInDay * dayInMonth;
-  let secondsInYear = secondsInMonth * monthsInYear;
-
-  /* year */
-  let year =
-    dateDiffInSeconds >= secondsInYear
-      ? Math.floor(dateDiffInSeconds / secondsInYear)
-      : 0;
-  dateDiffInSeconds -= year * secondsInYear;
-
-  /* month*/
-  let month =
-    dateDiffInSeconds >= secondsInMonth
-      ? Math.floor(dateDiffInSeconds / secondsInMonth)
-      : 0;
-  dateDiffInSeconds -= month * secondsInMonth;
-
-  /* days*/
-  let days =
-    dateDiffInSeconds >= secondsInDay
-      ? Math.floor(dateDiffInSeconds / secondsInDay)
-      : 0;
-  dateDiffInSeconds -= days * secondsInDay;
-
-  /*hour */
-  let hour =
-    dateDiffInSeconds >= secondsInOneHour
-      ? Math.floor(dateDiffInSeconds / secondsInOneHour)
-      : 0;
-  dateDiffInSeconds -= hour * secondsInOneHour;
-
-  /*minute */
-  let minute =
-    dateDiffInSeconds >= secondsInOneMinute
-      ? Math.floor(dateDiffInSeconds / secondsInOneMinute)
-      : 0;
-
+  //month
+  resultDate.push(
+    getDate(firstDate.getMonth(), secondDate.getMonth(), monthsInYear, 0)
+  );
+  //days
+  resultDate.push(
+    getDate(firstDate.getDate(), secondDate.getDate(), dayInMonth, 1)
+  );
+  //hour
+  resultDate.push(
+    getDate(firstDate.getHours(), secondDate.getHours(), hourInDay, 2)
+  );
+  //minute
+  resultDate.push(
+    getDate(firstDate.getMinutes(), secondDate.getMinutes(), minutesInHour, 3)
+  );
+  //seconds
+  resultDate.push(
+    getDate(firstDate.getSeconds(), secondDate.getSeconds(), minutesInHour, 4)
+  );
   showResult(
     `You entered the first date: ${firstDateTime}
     and the second date: ${secondDateTime}`,
     `The result of the calculation: 
-  ${year} year(s), ${month} month(s), ${days} day(s), ${hour} hour(s), ${minute} minute(s), ${(dateDiffInSeconds -=
-      minute * secondsInOneMinute)} second(s)`
+  ${resultDate[0].value} year(s), ${resultDate[1].value} month(s), ${resultDate[2].value} day(s), ${resultDate[3].value} hour(s), ${resultDate[4].value} minute(s), ${resultDate[5].value} second(s)`
   );
 };
 
@@ -190,11 +190,7 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   const regex = /^([1-9]\d*)\*([1-9]\d*)$/gm;
 
   if (!regex.test(sizeBoard)) {
-    showResult(
-      "Enter the size of the board according to the template. " +
-        "The date and time are not correctly entered!",
-      ""
-    );
+    showResult("Enter the size of the board according to the template.", "");
     return;
   }
   const row = Number(sizeBoard.match(/^([1-9]\d*)(?=\*)/gm)[0]);
@@ -203,7 +199,7 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   const height = doc.documentElement.clientHeight - 300;
   const sizeCell = Math.min(width / colum, height / row);
 
-  let chessBoard = `<div class="chessBoard">`;
+  const chessBoard = `<div class="chessBoard">`;
   for (let r = 0; r < row; r++) {
     chessBoard += `<div class="row--board">`;
     for (let c = 0; c < colum; c++) {
@@ -238,17 +234,17 @@ textAreaTaskFive.addEventListener("blur", () => {
 
   let list = `<ol class="list">`;
   if (arrLink != null) {
-    arrLink.forEach(element => {
+    arrLink.sort().forEach(element => {
       list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
   if (arrIp != null) {
-    arrIp.forEach(element => {
+    arrIp.sort().forEach(element => {
       list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
   if (arrIp6 != null) {
-    arrIp6.forEach(element => {
+    arrIp6.sort().forEach(element => {
       list += `<li><a href="http://${element}">${element}</a></li>`;
     });
   }
