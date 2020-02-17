@@ -30,23 +30,24 @@ function fillDropdownList() {
 }
 fillDropdownList();
 
-function dropdownSelect() {
-  $("#dropDownSelect").slideToggle("slow");
-  $("#imgButton").attr(
-    "src",
-    `img/icon/${$("#dropdown").hasClass("open") ? "low" : "row"}.png`
-  );
-  $("#dropdown").toggleClass("open");
-}
 $(document).ready(function() {
-  $("#dropdown").click(dropdownSelect);
-  $("#dropdown").hover(function() {
-    if ($(this).hasClass("open")) {
-      dropdownSelect();
-    }
-  });
+  const dropdown = "#dropdown";
+  function dropdownSelect() {
+    $("#dropDownSelect").slideToggle("fast");
+    $("#imgButton").attr(
+      "src",
+      `img/icon/${$(dropdown).hasClass("open") ? "low" : "row"}.png`
+    );
+    $(dropdown).toggleClass("open");
+  }
 
-  $("#optionSelect>*").click(function() {
-    $(".default--content").html($(this.parentNode).clone());
+  const defaultContent = ".default--content";
+  const optionSelect = ".option--select";
+  $(dropdown).click(dropdownSelect);
+  $(`${optionSelect}>*`).click(function() {
+    $(defaultContent).html($(this.parentNode).clone());
+  });
+  $(optionSelect).click(function() {
+    $(defaultContent).html($(this).clone());
   });
 });
