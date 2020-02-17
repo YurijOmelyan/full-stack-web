@@ -60,7 +60,7 @@ doc.getElementById("buttonFirstTaskSecond").onclick = function() {
     return;
   }
   const hour = getNumberOccurrences(timeInSeconds, secondsInOneHour);
-  const minute = getNumberOccurrences(
+  let minute = getNumberOccurrences(
     timeInSeconds - hour * secondsInOneHour,
     secondsInOneMinute
   );
@@ -79,7 +79,7 @@ doc.getElementById("buttonFirstTaskSecond").onclick = function() {
 };
 
 function getNumberOccurrences(number, multiplicity) {
-  const count = 0;
+  let count = 0;
   while (number >= multiplicity) {
     number -= multiplicity;
     count++;
@@ -116,14 +116,15 @@ doc.getElementById("buttonTaskThree").onclick = function() {
 
   const firstDateTime = doc.getElementById("firstNumber-TaskThree").value;
   const secondDateTime = doc.getElementById("secondNumber-TaskThree").value;
-  const regex = /^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/gm;
+  const regex = /^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/;
 
-  if (!regex.test(firstDateTime) && !regex.test(secondDateTime)) {
+  if (!regex.test(firstDateTime) || !regex.test(secondDateTime)) {
     showResult("The date and time are not correctly entered!", "");
     return;
   }
-  const firstDate = new Date(firstDateTime);
-  const secondDate = new Date(secondDateTime);
+
+  let firstDate = new Date(firstDateTime);
+  let secondDate = new Date(secondDateTime);
   if (firstDate < secondDate) {
     [firstDate, secondDate] = [secondDate, firstDate];
   }
@@ -199,7 +200,7 @@ doc.getElementById("buttonTaskFour").onclick = function() {
   const height = doc.documentElement.clientHeight - 300;
   const sizeCell = Math.min(width / colum, height / row);
 
-  const chessBoard = `<div class="chessBoard">`;
+  let chessBoard = `<div class="chessBoard">`;
   for (let r = 0; r < row; r++) {
     chessBoard += `<div class="row--board">`;
     for (let c = 0; c < colum; c++) {
@@ -268,19 +269,17 @@ doc.getElementById("buttonTaskSixth").onclick = function() {
     showResult("No regex", "");
     return;
   }
-  const arr = new Set(
-    text.match(new RegExp(regex, "g")).sort(function(a, b) {
-      return b - a;
-    })
-  );
+  const arr = text.match(regex);
+  if (!(arr == null)) {
+    arr.forEach(element => {
+      text = text.replace(
+        new RegExp(`(?<!(<mark>))${element}(?!</mark>)`, ""),
+        `<mark>${element}</mark>`
+      );
+    });
+  }
 
-  arr.forEach(element => {
-    text = text.replace(
-      new RegExp(`(?<!(<mark>))${element}(?!</mark>)`, "g"),
-      `<mark>${element}</mark>`
-    );
-  });
-  showResult(` `, text);
+    showResult(` `, text);
 };
 
 /*Close result*/
