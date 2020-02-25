@@ -2,3 +2,4 @@ $ cat .gitignore
 got
 .vscode
 test    
+.idea
