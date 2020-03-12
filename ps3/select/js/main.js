@@ -1,3 +1,7 @@
+const dropdown = "#dropdown";
+const defaultContent = ".default--content";
+const optionSelect = ".option--select";
+
 const arrUser = [
   { avatar: "1.png", name: "Vasya" },
   { avatar: "2.png", name: "Tasya" },
@@ -17,6 +21,17 @@ const arrUser = [
   { avatar: "16.png", name: "Fasha" }
 ];
 
+function dropdownSelect() {
+  $("#dropDownSelect")
+    .stop()
+    .slideToggle("fast");
+  $("#imgButton").attr(
+    "src",
+    `img/icon/${$(dropdown).hasClass("open") ? "low" : "row"}.png`
+  );
+  $(dropdown).toggleClass("open");
+}
+
 function fillDropdownList() {
   const option = `<div id="optionSelect" class="option--select ">`;
   let optionSelect = "";
@@ -31,19 +46,17 @@ function fillDropdownList() {
 fillDropdownList();
 
 $(document).ready(function() {
-  const dropdown = "#dropdown";
-  function dropdownSelect() {
-    $("#dropDownSelect").slideToggle("fast");
-    $("#imgButton").attr(
-      "src",
-      `img/icon/${$(dropdown).hasClass("open") ? "low" : "row"}.png`
-    );
-    $(dropdown).toggleClass("open");
-  }
+  $(document).on("click", function(event) {
+    const element = $(dropdown);
+    const dropDownOpen = $(dropdown).hasClass("open");
+    if (
+      element.has(event.target).length === 1 ||
+      (element.has(event.target).length === 0 && dropDownOpen)
+    ) {
+      dropdownSelect();
+    }
+  });
 
-  const defaultContent = ".default--content";
-  const optionSelect = ".option--select";
-  $(dropdown).click(dropdownSelect);
   $(`${optionSelect}>*`).click(function() {
     $(defaultContent).html($(this.parentNode).clone());
   });
