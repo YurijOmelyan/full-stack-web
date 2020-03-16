@@ -4,9 +4,12 @@
     list containing only the name and file size in a human-readable size (1kB, 3mB, 1.5gb) in brackets.<br>
     Files can be downloaded. Make a small preview for image files.</h3>
 <form enctype="multipart/form-data" method="POST">
+    <br>
     Select a file to send:
     <input type="hidden" name="task" value="3">
     <input name="userfile" type="file"/>
+    <br>
+    <br>
     <input type="submit" value="Send file"/>
 </form>
 <br>
@@ -42,18 +45,26 @@ if (isset($_POST['task'])) {
         }
         $dir = $dirUpload;
         if (is_dir($dir)) {
-            if ($dh = opendir($dir)) {
-                echo "<ol>";
-                while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
+            if ($dh = opendir($dir)) :?>
+                <ol>
+                    <? while (($file = readdir($dh)) !== false) {
+                        $arrayImageTypes = ['jpeg', 'jpg', 'gif', 'png', 'svg', 'bmp'];
                         $pathToFile = "../" . $dir . "/" . $file;
-                        echo "<li><a href='/php/download.php?file=" . $pathToFile . "'>"
-                            . $file . " (" . human_filesize(filesize($dir . "/" . $file)) . ")</a></li>";
-                    }
-                }
-                echo "</ol>";
-                closedir($dh);
-            }
+                        $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+
+                        if ($file != "." && $file != "..") : ?>
+                            <li><a href='/php/download.php?file=<?= $pathToFile; ?>'><?= $file; ?>
+                                    ( <?= human_filesize(filesize($dir . "/" . $file)); ?>)
+                                    <? if (in_array($fileExtension, $arrayImageTypes)): ?>
+                                        <img class="small--image" src="<?= $pathToFile; ?>" alt="<?= $file; ?>">
+                                    <? endif; ?>
+                                </a></li>
+                        <? endif;
+
+                    } ?>
+                </ol>
+                <?php closedir($dh);
+            endif;
         }
     }
 }

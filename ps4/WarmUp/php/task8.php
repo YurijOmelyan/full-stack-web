@@ -15,7 +15,7 @@ if (isset($_POST['task'])) {
 </h3>
 <form method="post">
     <input type="hidden" name="task" value="8">
-    <textarea name="text" cols="30" rows="10"><?php echo $text; ?></textarea>
+    <textarea name="text" cols="30" rows="10"><?= $text; ?></textarea>
     <br><br>
     <input type="submit" name="submit" value="Show result">
 </form>
@@ -23,12 +23,12 @@ if (isset($_POST['task'])) {
 
 <?php
 if ($task == 8) {
-    if (!empty($text)) {
-        echo '<br>Number of spaces - ' . $numberSpaces = mb_substr_count($text, ' ');
-        $numberLines = mb_substr_count($text, "\r\n");
-        echo '<br>Number of lines - ' . ($numberLines + 1);
-        echo '<br>Number of letters - ' . (mb_strlen($text) - $numberSpaces - ($numberLines === 0 ? $numberLines : $numberLines + 1));
-        echo '<br> len - ' . mb_strlen($text);
-    }
+    if (!empty($text)) :?>
+        <br>Number of spaces - <?= $numberSpaces = mb_substr_count($text, ' ');
+        $numberLines = mb_substr_count($text, "\r\n"); ?>
+        <br>Number of lines - <?= ($numberLines + 1); ?>
+        <br>Number of letters - <?= (mb_strlen($text) - $numberSpaces - ($numberLines === 0 ? $numberLines : $numberLines + 1)); ?>
+        <br> len - <?= mb_strlen($text);
+    endif;
 }
 ?>

@@ -17,10 +17,16 @@ if (isset($_POST['task'])) {
     Enter the number of columns
     <br><br>
     <input type="hidden" name="task" value="4">
-    <input type="number" name="firstNumberTaskFourth" value="<?php echo $colums; ?>">
+    <input type="number" name="firstNumberTaskFourth"
+        <? if (isset($colums)) : ?>
+            value="<?= $colums; ?>"
+        <? endif; ?>>
     <br><br>
     Enter the number of rows
-    <br><input type="number" name="secondNumberTaskFourth" value="<?php echo $rows; ?>">
+    <br><input type="number" name="secondNumberTaskFourth"
+        <? if (isset($rows)): ?>
+            value="<?= $rows; ?>"
+        <? endif; ?>>
     <br><br>
     <input type="submit" name="submit" value="Show">
 </form>
@@ -28,19 +34,18 @@ if (isset($_POST['task'])) {
 
 <?php
 if ($task == 4) {
-    if (is_numeric($colums) && is_numeric($rows)) {
-        $chessBoard = "<div id='chessBoard' class='chessBoard'>";
-        for ($x = 1; $x <= $rows; $x++) {
-            $chessBoard .= "<div class='row--board'>";
-            for ($y = 0; $y < $colums; $y++) {
-                $chessBoard .= "<div class='cells " . (($x + $y) % 2 == 0 ? "white" : "black") . "'></div>";
-            }
-            $chessBoard .= "</div>";
-        }
-        $chessBoard .= "</div>";
-        echo $chessBoard;
-        echo "<script src='../js/main.js'></script>";
-    }
+    if (is_numeric($colums) && is_numeric($rows)) :?>
+        <div id='chessBoard' class='chessBoard'>
+            <? for ($x = 1; $x <= $rows; $x++): ?>
+                <div class='row--board'>
+                    <? for ($y = 0; $y < $colums; $y++) : ?>
+                        <div class='cells <?= (($x + $y) % 2 == 0 ? "white" : "black") ?>'></div>
+                    <? endfor; ?>
+                </div>
+            <? endfor; ?>
+        </div>
+        <script src='../js/main.js'></script>
+    <? endif;
 }
 ?>
 <br>

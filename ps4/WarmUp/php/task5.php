@@ -14,16 +14,16 @@ if (isset($_POST['task'])) {
     Enter the number
     <br><br>
     <input type="hidden" name="task" value="5">
-    <input type="number" name="numberTaskFive" value="<?php echo $number; ?>"><br><br>
+    <input type="number" name="numberTaskFive" value="<?= $number; ?>"><br><br>
     <input type="submit" name="submit" value="Calculate">
 </form>
 <br>
 
 <?php
 
-if ($task == 5) {
-    echo "Result: " . getNumberDigitsInNumber(abs($number));
-}
+if ($task == 5) :?>
+    Result: <?= getNumberDigitsInNumber(abs($number)); ?>
+<?endif;
 
 function getNumberDigitsInNumber($num)
 {
