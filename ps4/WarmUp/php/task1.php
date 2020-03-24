@@ -1,43 +1,25 @@
-<?php
-$firstNumber = $secondNumber = "";
-$result = $task = 0;
-
-if (isset($_POST['task'])) {
-    $task = htmlspecialchars($_POST['task']);
-    if ($task == 1) {
-        $firstNumber = htmlspecialchars($_POST["firstNumberTaskOne"]);
-        $secondNumber = htmlspecialchars($_POST["secondNumberTaskOne"]);
-    }
-}
-?>
+<br>
+<h2>Task1</h2>
+<h3> Problem statement: calculate the sum of numbers in the entered range</h3>
+<form method="post">
+    <input type="hidden" name="task" value="1">
+    Enter the first number
     <br>
-    <h2>Task1</h2>
-    <h3> Problem statement: calculate the sum of numbers in the entered range</h3>
-    <form method="post">
-        <input type="hidden" name="task" value="1">
-        Enter the first number
-        <br>
-        <input type="number" name="firstNumberTaskOne" value="<?= $firstNumber; ?>">
-        <br><br>
-        Enter the second number
-        <br><input type="number" name="secondNumberTaskOne" value="<?= $secondNumber; ?>">
-        <br><br>
-        <input type="submit" name="submitTaskOne" value="Calculate">
-    </form>
+    <input
+            type="number"
+            name="firstNumberTaskOne"
+            value="<?= (isset($_SESSION['task1'])) ? $_SESSION['task1']['firstNumber'] : '' ?>">
+    <br><br>
+    Enter the second number
+    <br><input
+            type="number"
+            name="secondNumberTaskOne"
+            value="<?= (isset($_SESSION['task1'])) ? $_SESSION['task1']['secondNumber'] : '' ?>">
+    <br><br>
+    <input type="submit" name="submitTaskOne" value="Calculate">
+</form>
+<br>
+<?php if (isset($_SESSION['task1'])): ?>
+    <div><?= $_SESSION['task1']['result']; ?> </div>
     <br>
-
-<?php
-
-if ($task == 1) {
-
-    if (is_numeric($firstNumber) && is_numeric($secondNumber)) {
-        for ($x = min($firstNumber, $secondNumber); $x <= max($firstNumber, $secondNumber); $x++) {
-            $result += $x;
-        } ?>
-        <div>Result: <?= $result ?></div><br>
-    <? } else { ?>
-        <div>Fill in the blank fields.</div><br>
-    <?php }
-    unset($task);
-}
-?>
+<?php endif; ?>

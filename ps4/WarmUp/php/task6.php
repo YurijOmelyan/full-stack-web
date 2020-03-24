@@ -7,28 +7,8 @@
     <input type="submit" name="submit" value="show">
 </form>
 <br>
-
-<?php
-if (isset($_POST['task'])) {
-    $task = htmlspecialchars($_POST['task']);
-    if ($task == 6) {
-
-        function random()
-        {
-            return mt_rand(0, 10);
-        }
-
-        function doubleValue($el)
-        {
-            return $el * 2;
-        }
-
-        $array = array_unique(array_map('random', range(0, 99)));
-        sort($array);
-        print_r(array_map('doubleValue', array_reverse($array)));
+<?php if (isset($_SESSION['task6'])) {
+    foreach ($_SESSION['task6'] as $step) {
+        echo '<br>' . $step['message'] . ':<br>' . implode(' ',$step['result']) . '<br><br>';
     }
-}
-
-?>
-<br>
-<br>
+} ?>

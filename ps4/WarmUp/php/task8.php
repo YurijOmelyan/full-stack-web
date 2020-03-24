@@ -1,12 +1,3 @@
-<?php
-$text = '';
-if (isset($_POST['task'])) {
-    $task = htmlspecialchars($_POST['task']);
-    if ($task == 8) {
-        $text = htmlspecialchars($_POST["text"]);
-    }
-}
-?>
 <br>
 <h2>Task8</h2>
 <h3>Count the number of lines, letters and spaces in the entered text.
@@ -15,20 +6,23 @@ if (isset($_POST['task'])) {
 </h3>
 <form method="post">
     <input type="hidden" name="task" value="8">
-    <textarea name="text" cols="30" rows="10"><?= $text; ?></textarea>
+    <textarea
+            name="text"
+            cols="30"
+            rows="10"><?= (isset($_SESSION['task8'])) ? $_SESSION['task8']['text'] : '' ?></textarea>
     <br><br>
     <input type="submit" name="submit" value="Show result">
 </form>
 <br>
-
 <?php
-if ($task == 8) {
-    if (!empty($text)) :?>
-        <br>Number of spaces - <?= $numberSpaces = mb_substr_count($text, ' ');
-        $numberLines = mb_substr_count($text, "\r\n"); ?>
-        <br>Number of lines - <?= ($numberLines + 1); ?>
-        <br>Number of letters - <?= (mb_strlen($text) - $numberSpaces - ($numberLines === 0 ? $numberLines : $numberLines + 1)); ?>
-        <br> len - <?= mb_strlen($text);
-    endif;
-}
-?>
+if (isset($_SESSION['task8'])) {
+    $result = $_SESSION['task8'];
+    if (isset($result['message'])) {
+        echo $result['message'];
+    } else {
+        foreach ($result['result'] as $item) {
+            echo $item['message'] . $item['result'] . '<br>';
+        }
+    }
+} ?>
+<br>

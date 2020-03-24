@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<?php include_once 'app/appConstants.php'; ?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,19 +15,10 @@
         }
     </style>
 </head>
-<script>const a = 5;</script>
 <body>
-<form action="votingResults.php" method="post">
+<form action="<?= PATH_LOGIC ?>" method="post">
     <h2>Make your choice:</h2>
-    <?php
-    $file = $_SERVER['DOCUMENT_ROOT'] . "/base/base.json";
-    $json = file_get_contents($file);
-    $arr = json_decode($json, true);
-    foreach ($arr as $key => $value) :?>
-        <label>
-            <input type="radio" name="selectedValue" value="<?= $value ?>"><?= $value ?>
-        </label>
-    <? endforeach; ?>
+    <?php include_once PATH_LIST_VOTING; ?>
     <input type="submit" value="Show voting result">
 </form>
 
