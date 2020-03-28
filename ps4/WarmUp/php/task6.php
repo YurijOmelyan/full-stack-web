@@ -9,6 +9,6 @@
 <br>
 <?php if (isset($_SESSION['task6'])) {
     foreach ($_SESSION['task6'] as $step) {
-        echo '<br>' . $step['message'] . ':<br>' . implode(' ',$step['result']) . '<br><br>';
+        echo '<br>' . $step['message'] . ':<br>' . implode(' ', $step['result']) . '<br><br>';
     }
-} ?>
+}

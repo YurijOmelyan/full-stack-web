@@ -24,4 +24,4 @@
 <?php if (isset($_SESSION['task2'])): ?>
     <div><?= $_SESSION['task2']['result']; ?> </div>
     <br>
-<?php endif; ?>
+<?php endif;

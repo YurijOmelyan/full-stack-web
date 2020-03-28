@@ -1,4 +1,6 @@
-﻿<?php include_once 'app/appConstants.php'; ?>
+﻿<?php
+include_once 'app/appConstants.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">

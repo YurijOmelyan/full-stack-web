@@ -66,53 +66,59 @@ function getResultTaskThird()
 
 function fileUpload($dir)
 {
-    if (isset($_FILES['userfile']['name'])) {
+    if (!isset($_FILES['userfile']['name'])) {
+        exit;
+    }
 
-        if ($_FILES['userfile']['error'] === 0) {
-            if (!file_exists($dir)) {
-                mkdir($dir);
-            }
-
-            $file = $dir . $_FILES['userfile']['name'];
-            move_uploaded_file($_FILES['userfile']['tmp_name'], $file);
-            return 'File - ' . $_FILES['userfile']['name'] . ' successfully uploaded!';
-
-        } else {
-            $phpFileUploadErrors = array(
-                1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-                2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-                3 => 'The uploaded file was only partially uploaded',
-                4 => 'No file was uploaded',
-                6 => 'Missing a temporary folder',
-                7 => 'Failed to write file to disk.',
-                8 => 'A PHP extension stopped the file upload.',
-            );
-            return $phpFileUploadErrors[$_FILES['userfile']['error']];
+    if ($_FILES['userfile']['error'] === 0) {
+        if (!file_exists($dir)) {
+            mkdir($dir);
         }
+
+        $file = $dir . $_FILES['userfile']['name'];
+        move_uploaded_file($_FILES['userfile']['tmp_name'], $file);
+        return 'File - ' . $_FILES['userfile']['name'] . ' successfully uploaded!';
+
+    } else {
+        $phpFileUploadErrors = array(
+            1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+            2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+            3 => 'The uploaded file was only partially uploaded',
+            4 => 'No file was uploaded',
+            6 => 'Missing a temporary folder',
+            7 => 'Failed to write file to disk.',
+            8 => 'A PHP extension stopped the file upload.',
+        );
+        return $phpFileUploadErrors[$_FILES['userfile']['error']];
     }
 }
 
 function showFileList($dir)
 {
     $result = '';
-    if (is_dir($dir) && ($dh = opendir($dir))) {
-        while (($file = readdir($dh)) !== false) {
-            if ($file != "." && $file != "..") {
-                $path = $dir . $file;
-                $arrayImageTypes = ['jpeg', 'jpg', 'gif', 'png', 'svg', 'bmp'];
-                $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-
-                $result .= "<li><a href='app/download.php?file=" . urlencode($file) . "'>$file";
-                $result .= '(' . human_filesize(filesize($path)) . ')';
-
-                if (in_array($fileExtension, $arrayImageTypes)) {
-                    $result .= "<img class='small--image' src='$path' alt = '$file' />";
-                }
-                $result .= '</a></li>';
-            }
-        }
-        closedir($dh);
+    if (!is_dir($dir) || !($dh = opendir($dir))) {
+        return $result;
     }
+
+    while (($file = readdir($dh)) !== false) {
+        if ($file != "." && $file != "..") {
+            continue;
+        }
+
+        $path = $dir . $file;
+        $arrayImageTypes = ['jpeg', 'jpg', 'gif', 'png', 'svg', 'bmp'];
+        $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+
+        $result .= "<li><a href='app/download.php?file=" . urlencode($file) . "'>$file";
+        $result .= '(' . human_filesize(filesize($path)) . ')';
+
+        if (in_array($fileExtension, $arrayImageTypes)) {
+            $result .= "<img class='small--image' src='$path' alt = '$file' />";
+        }
+        $result .= '</a></li>';
+
+    }
+    closedir($dh);
     return $result;
 }
 
