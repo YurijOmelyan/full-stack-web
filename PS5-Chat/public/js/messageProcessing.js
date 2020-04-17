@@ -17,11 +17,11 @@ $(document).ready(function () {
 
 function showGreeting() {
     addMessage(`<div class="box--message header content bg--color--${indexColor[index]}">Welcome to easy chat</div>`)
-}
+   }
 
 function getMessagesFromServer() {
 
-    let idMessage = listMessage.length === 0 ? 0 : listMessage[listMessage.length - 1].id;
+    let idMessage = listMessage.length === 0 ? -1 : listMessage[listMessage.length - 1].id;
     let data = {
         'messenger': 'getting',
         'data': {
@@ -30,7 +30,6 @@ function getMessagesFromServer() {
     };
 
     executeServerRequest(data);
-
     setTimeout(getMessagesFromServer, 3000);
 }
 
@@ -74,10 +73,9 @@ function executeServerRequest(data) {
 }
 
 function showMessage(messageArray) {
-
     for (let obj in messageArray) {
         listMessage.push(messageArray[obj]);
-        let time = getTime(messageArray[obj].date);
+        let time = getTime(messageArray[obj].time);
         let userName = `<div class="user--name">${messageArray[obj].name}:</div>`;
         let message = `<div class="message">${getMessage(messageArray[obj].message)}</div>`;
 
@@ -108,10 +106,13 @@ function getMessage(msg) {
     return msg;
 }
 
-function getTime(date) {
-    let hours = String(date.hours);
-    let minutes = String(date.minutes);
-    let seconds = String(date.seconds);
+function getTime(time) {
+
+    let date = new Date(time * 1000);
+
+    let hours = String(date.getHours());
+    let minutes = String(date.getMinutes());
+    let seconds = String(date.getSeconds());
 
     let result = '<div class="time">[';
     result += `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;

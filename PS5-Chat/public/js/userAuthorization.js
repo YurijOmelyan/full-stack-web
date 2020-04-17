@@ -7,15 +7,12 @@ $(document).ready(function () {
     $('form').submit(function (e) {
 
         e.preventDefault();
-        const userName = '#userName';
-        const pass = '#userPass';
-        user = $(userName).val();
-
+        user = $(arrayKeys.get('name')[0]).val();
         const data = {
             'authorization': 'user',
             'user': {
                 'name': user,
-                'pass': $(pass).val()
+                'pass': $(arrayKeys.get('pass')[0]).val()
             }
         };
 

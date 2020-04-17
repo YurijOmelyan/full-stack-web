@@ -30,17 +30,15 @@ class Router
         if (!array_key_exists($keyPost, $this->routes)) {
             $this->setError(2);
         }
-        $controllerName = array_key_first($this->post) . 'Controller';
+        $controllerName = $keyPost . 'Controller';
         $controllerName = ucfirst($controllerName);
 
 
         if (!in_array($this->post[$keyPost], $this->routes[$keyPost])) {
             $this->setError(3);
         }
-        $actionName = 'action' . ucfirst($keyPost);
 
         $controllerFile = ROOT . PATH_CONTROLLERS . $controllerName . '.php';
-
         if (!file_exists($controllerFile)) {
             $this->setError(4);
         }
@@ -48,6 +46,7 @@ class Router
         include_once($controllerFile);
 
         $controllerObject = new $controllerName($this->post);
+        $actionName = 'action' . ucfirst($keyPost);
         $result = $controllerObject->$actionName();
     }
 }

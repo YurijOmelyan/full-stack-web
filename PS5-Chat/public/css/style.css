@@ -48,17 +48,23 @@ body, .page, .main {
 }
 
 .input--box {
-    border: solid #fffecd;
+    border-style: solid;
+    border-color: #fffecd;
+    border-width: medium;
     min-height: 25px;
     background-color: #fffecd;
 }
 
 .input--box:hover {
-    border: solid #635960;
+    border-style: solid;
+    border-color: #635960;
+    border-width: medium;
 }
 
 .input--button {
-    border: solid #635960;
+    border-style: solid;
+    border-color: #635960;
+    border-width: medium;
     width: 100%;
     min-height: 25px;
     background-color: #635960;
@@ -66,7 +72,9 @@ body, .page, .main {
 }
 
 .input--button:hover {
-    border: solid #fffecd;
+    border-style: solid;
+    border-color: #fffecd;
+    border-width: medium;
 }
 
 .top--block {
@@ -166,4 +174,20 @@ body, .page, .main {
 
 .message {
     word-wrap: anywhere;
+}
+
+.button--shadow {
+    height: 200px;
+    background: linear-gradient(#80808080, rgba(0, 0, 0, 0));
+    transform: rotate(-15deg);
+    position: relative;
+    display: block;
+    left: 22px;
+    top: -33px;
+}
+
+.block {
+    z-index: 1;
+    position: relative;
+    background: #b9c783;
 }
