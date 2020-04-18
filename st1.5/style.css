@@ -1,0 +1,35 @@
+.slider {
+    text-align: center;
+}
+
+.slider .slider-indicators {
+    padding: 0;
+}
+
+.slider-previews li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 1rem;
+    vertical-align: middle;
+    border: 5px solid transparent;
+}
+
+.slider-previews li img {
+    display: block;
+    height: 60px;
+}
+
+.slider .slider-previews li.current {
+    border: 5px solid rgba(0, 0, 0, 0.2);
+}
+
+.slider-current {
+    position: relative;
+    height: 400px;
+}
+
+.current--image {
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+}
