@@ -1,0 +1,40 @@
+.donate {
+    position: relative;
+    background: url("../../images/green-pattern.jpg");
+    height: 326px;
+    display: flex;
+    justify-content: center;
+}
+
+.donate--content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.donate--content button {
+    position: relative;
+    margin-top: 38px;
+    width: 225px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.donate h1 {
+    font-size: 40px;
+    margin-top: 26%;
+    color: #ffffff;
+    letter-spacing: -1.5px;
+}
+
+@media all and (max-width: 720px) {
+    .donate h1 {
+        font-size: 36px;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .donate h1 {
+        font-size: 30px;
+    }
+}

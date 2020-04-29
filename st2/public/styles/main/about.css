@@ -1,0 +1,141 @@
+.about--me {
+    position: relative;
+    background: #f4f4f4;
+    height: 651px;
+}
+
+.wrapper__img--ipad {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    width: 340px;
+    height: 500px;
+}
+
+.about--me__content {
+    position: absolute;
+    left: 161px;
+    top: 140px;
+    font-size: 16px;
+    width: 580px;
+}
+
+.about--me__content h1 {
+    font-size: 40px;
+    padding-bottom: 35px;
+    letter-spacing: -3.5px;
+    color: #545454;
+}
+
+.about--me__content p {
+    padding-bottom: 29px;
+    line-height: 23px;
+    color: #7e7e7e;
+}
+
+.about--me__content .left--border {
+    border-left: solid 6px #4eacdd;
+    padding-left: 17px;
+    padding-bottom: 0;
+}
+
+.about--me button {
+    color: #14af8f;
+    bottom: 142px;
+    left: 161px;
+}
+
+.about--me button .fas {
+    font-size: 15px;
+    right: 32px;
+}
+
+@media all and (max-width: 1259px) {
+    .about--me__content, .about--me button {
+        left: 12%;
+    }
+
+    .about--me button {
+        bottom: 22%;
+    }
+
+    .wrapper__img--ipad {
+        width: 27%;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .about--me__content, .about--me button {
+        left: 10%;
+    }
+
+    .about--me__content {
+        top: 100px;
+        width: 60%;
+    }
+
+    .about--me button {
+        bottom: 20%;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .wrapper__img--ipad {
+        margin: 0 auto;
+        bottom: auto;
+        right: auto;
+        height: 100%;
+        width: auto;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .img--ipad {
+        height: 100%;
+    }
+
+    .about--me__content {
+        z-index: 1;
+        top: 70px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 360px;
+    }
+
+    .about--me button {
+        z-index: 1;
+        bottom: 100px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .about--me__content h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .about--me__content p {
+        color: black;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .wrapper__img--ipad {
+        display: none;
+    }
+
+    .about--me button {
+        bottom: 50px;
+
+    }
+
+    .about--me__content {
+        width: 90%;
+    }
+
+    .about--me__content h1 {
+        font-size: 30px;
+    }
+
+}

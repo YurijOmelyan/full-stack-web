@@ -1,0 +1,13 @@
+footer {
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.font--color {
+    color: #6dc5ea;
+}

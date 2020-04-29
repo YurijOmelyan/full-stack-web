@@ -1,0 +1,137 @@
+
+.portfolio {
+    position: relative;
+    background: #ffffff;
+    height: 649px;
+}
+
+.portfolio button {
+    color: #ea4c89;
+    bottom: 238px;
+    right: 331px;
+    width: 224px;
+}
+
+.wrapper__img--devices {
+    position: absolute;
+    height: 378px;
+    width: 781px;
+    overflow: hidden;
+    top: 271px;
+}
+
+.img--devices {
+    right: 0;
+    position: absolute;
+}
+
+.portfolio__content {
+    position: absolute;
+    top: 98px;
+    right: 161px;
+}
+
+
+.portfolio__content h1 {
+    color: #545454;
+    font-size: 40px;
+    padding-bottom: 40px;
+    letter-spacing: -3px;
+}
+
+.portfolio__content p.font--style {
+    color: #474e5d;
+}
+
+.portfolio__content p {
+    padding-bottom: 8px;
+    color: #7e7e7e;
+}
+
+.portfolio__content > p:nth-child(3) {
+    padding-bottom: 34px;
+}
+
+.portfolio button i {
+    right: 32px;
+}
+
+@media all and (max-width: 1259px) {
+    .portfolio__content {
+        right: 12%;
+    }
+
+    .portfolio button {
+        right: 25%;
+    }
+
+    .wrapper__img--devices {
+        width: 62%;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .portfolio__content {
+        right: 10%;
+        top: 70px
+    }
+
+    .portfolio button {
+        right: 23%;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .portfolio__content h1 {
+        font-size: 40px;
+    }
+
+    .wrapper__img--devices {
+        width: 100%;
+    }
+
+    .img--devices {
+        right: 50%;
+        transform: translate(50%);
+    }
+
+    .portfolio button {
+        right: 50%;
+        transform: translate(50%);
+        bottom: 58%;
+    }
+
+    .portfolio__content {
+        right: 50%;
+        top: 25px;
+        transform: translate(50%);
+        width: 100%;
+    }
+
+    .portfolio__content h1 {
+        font-size: 36px;
+        text-align: center;
+        padding-bottom: 5%;
+    }
+
+    .portfolio__content p {
+        text-align: center;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .img--devices {
+        width: 100%;
+        bottom: 0;
+    }
+
+    .portfolio button {
+        bottom: 30%;
+    }
+
+    .portfolio h1 {
+        font-size: 30px;
+        padding-bottom: 15%;
+    }
+
+}

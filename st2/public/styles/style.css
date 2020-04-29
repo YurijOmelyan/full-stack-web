@@ -1,0 +1,109 @@
+@import 'header/header.css';
+@import 'main/main.css';
+@import "footer/footer.css";
+
+@font-face {
+    font-family: 'Black Jack';
+    src: url("../font/BLACKJAR.TTF");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 1260px;
+    margin: 0 auto;
+    position: relative;
+    font-size: 16px;
+    font-family: Montserrat, serif;
+}
+
+
+header {
+    height: 651px;
+    position: relative;
+}
+
+button {
+    display: inline-flex;
+    position: absolute;
+    cursor: pointer;
+    height: 57px;
+    width: 173px;
+    border: solid 2px;
+    border-radius: 2px;
+    background: inherit;
+    align-items: center;
+}
+
+button div {
+    margin-left: 26px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+button i {
+    font-size: 14px;
+    position: absolute;
+    right: 29px;
+    top: 20px;
+}
+
+
+p, h1 {
+    font-weight: bold;
+}
+
+.font--style {
+    font-weight: bold;
+    font-style: italic;
+}
+
+@media all and (max-width: 1259px) {
+    body {
+        max-width: 100%;
+    }
+}
+
+
+#buttonTop {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background: #f4f4f4;
+    border: none;
+    position: fixed;
+    right: 59px;
+    bottom: 38px;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s opacity, 1s visibility;
+}
+
+.arrow {
+    width: 7px;
+    height: 7px;
+    border: none;
+    border-left: solid 2px #545454;
+    border-top: solid 2px #545454;
+    position: absolute;
+    transform: rotate(45deg);
+    right: 15px;
+    top: 18px;
+    border-radius: 2px;
+    margin: 0;
+
+}
+
+#buttonTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hide{
+    opacity: 0;
+    visibility: hidden;
+}
