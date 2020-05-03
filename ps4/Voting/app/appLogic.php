@@ -20,13 +20,13 @@ function main()
         $resultArr = array_fill_keys($arr, 0);
     }
 
-    saveVotingResult($resultArr,$key,$pathResult);
+    saveVotingResult($resultArr, $key, $pathResult);
 
     header("Location: ../votingResults.php");
-
 }
 
-function saveVotingResult($arr, $key,$path){
+function saveVotingResult($arr, $key, $path)
+{
     $arr[$key]++;
     file_put_contents($path, json_encode($arr));
 }

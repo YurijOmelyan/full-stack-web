@@ -10,7 +10,6 @@ function getResultTaskOne()
     $arrResult['secondNumber'] = ($secondNumber = htmlspecialchars($_POST["secondNumberTaskOne"]));
 
     if (is_numeric($firstNumber) && is_numeric($secondNumber)) {
-
         $sum = 0;
         for ($x = min($firstNumber, $secondNumber); $x <= max($firstNumber, $secondNumber); $x++) {
             $sum += $x;
@@ -43,7 +42,6 @@ function getResultTaskSecond()
             }
         }
         $arrResult['result'] = 'Result: ' . $sum;
-
     } else {
         $arrResult['result'] = 'Fill in the blank fields.';
     }
@@ -61,7 +59,6 @@ function getResultTaskThird()
     $arrResult['message'] = fileUpload($dirUpload);
     $arrResult['result'] = showFileList($dirUpload);
     return $arrResult;
-
 }
 
 function fileUpload($dir)
@@ -78,7 +75,6 @@ function fileUpload($dir)
         $file = $dir . $_FILES['userfile']['name'];
         move_uploaded_file($_FILES['userfile']['tmp_name'], $file);
         return 'File - ' . $_FILES['userfile']['name'] . ' successfully uploaded!';
-
     } else {
         $phpFileUploadErrors = array(
             1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
@@ -116,7 +112,6 @@ function showFileList($dir)
             $result .= "<img class='small--image' src='$path' alt = '$file' />";
         }
         $result .= '</a></li>';
-
     }
     closedir($dh);
     return $result;
@@ -232,7 +227,6 @@ function getResultTaskEight()
     $arrResult['text'] = ($text = htmlspecialchars($_POST["text"]));
 
     if (!empty($text)) {
-
         $result['firstStep']['message'] = 'Number of spaces - ';
         $result['firstStep']['result'] = ($numberSpaces = mb_substr_count($text, ' '));
 

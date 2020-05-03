@@ -1,4 +1,5 @@
 ﻿<?php
+
 include_once 'app/appConstants.php';
 ?>
 

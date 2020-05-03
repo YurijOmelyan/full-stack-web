@@ -1,4 +1,5 @@
 <?php
+
 include_once 'appConstants.php';
 
 $json = file_get_contents(PATH_BASE);
