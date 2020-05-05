@@ -58,7 +58,7 @@ function setEventListener() {
 }
 
 function showImage() {
-
+    $(SELECTOR_CURRENT_IMAGE).finish();
     let arrayLength = IMAGES.length - 1;
     if (currentIndex > arrayLength) {
         currentIndex = 0;
