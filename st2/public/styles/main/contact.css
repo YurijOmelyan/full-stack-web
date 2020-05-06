@@ -1,9 +1,13 @@
 .contact {
     height: 650px;
     background: #f4f4f4;
+}
+
+.contact .container {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .icons--block {
@@ -30,6 +34,7 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    color: #545454;
 }
 
 .email--block {

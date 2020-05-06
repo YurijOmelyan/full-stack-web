@@ -1,9 +1,12 @@
 .donate {
-    position: relative;
     background: url("../../images/green-pattern.jpg");
     height: 326px;
+}
+
+.donate .container {
     display: flex;
     justify-content: center;
+
 }
 
 .donate--content {

@@ -1,10 +1,13 @@
 .title {
-    position: absolute;
-    height: 100%;
     background: url('../../images/blue-pattern.jpg');
-    transition: 1s opacity, 1s visibility;
-    width: 100%;
+}
+
+.container__nav--button {
+    position: absolute;
     top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
 }
 
 .wrapper__img--iphone {
@@ -100,13 +103,18 @@
 }
 
 .navigation--block {
+    position: absolute;
     background-color: #f3787a;
-    height: 100%;
+    top: 0;
+    z-index: 1;
+    transition: 1s opacity, 1s visibility;
+}
+
+.navigation--block .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 nav {
@@ -115,7 +123,6 @@ nav {
 }
 
 nav > a {
-    text-decoration: none;
     color: white;
     font-size: 18px;
     margin: 7px;
@@ -173,6 +180,12 @@ nav > a {
 .rotatable--bottom {
     transform: rotate(-45deg);
 }
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 @media all and (max-width: 1024px) {
     .wrapper__img--iphone {

@@ -7,6 +7,9 @@ footer {
     font-weight: bold;
 }
 
+footer span {
+    margin: 0 5px;
+}
 
 .font--color {
     color: #6dc5ea;

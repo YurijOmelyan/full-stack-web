@@ -32,7 +32,7 @@ function menubuttonAnimation() {
     const hideItem = 'hide';
 
     menu.click(function () {
-        $('.title').toggleClass(hideItem);
+        $('.navigation--block').toggleClass(hideItem);
         $('.hiding--elements').toggleClass(hideItem);
 
         const element1 = [$('.element1'), 'starting--position', 'rotatable--top'];
