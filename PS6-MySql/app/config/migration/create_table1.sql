@@ -1,0 +1,6 @@
+CREATE TABLE ?table_name? (
+`id` BIGINT NOT NULL AUTO_INCREMENT ,
+`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`user_id` BIGINT NOT NULL ,
+`message` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
+PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT = 'messages';

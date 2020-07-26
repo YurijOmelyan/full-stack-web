@@ -1,10 +1,11 @@
 const messageInputField = '#messageInputField';
 const messageList = '#messageList';
 const smileArr = new Map([
-    [':)', '<img class="size--smile" src="https://twemoji.maxcdn.com/2/72x72/1f600.png" >'],
-    [':(', '<img class="size--smile" src="https://twemoji.maxcdn.com/2/72x72/1f620.png" >']
+    [':)', 'https://twemoji.maxcdn.com/2/72x72/1f600.png'],
+    [':(', 'https://twemoji.maxcdn.com/2/72x72/1f620.png']
 ]);
 const indexColor = [2, 3, 5];
+const MESSENGER_URL = 'messenger';
 let index = 0;
 
 let listMessage = [];
@@ -17,13 +18,13 @@ $(document).ready(function () {
 
 function showGreeting() {
     addMessage(`<div class="box--message header content bg--color--${indexColor[index]}">Welcome to easy chat</div>`)
-   }
+}
 
 function getMessagesFromServer() {
 
     let idMessage = listMessage.length === 0 ? -1 : listMessage[listMessage.length - 1].id;
     let data = {
-        'messenger': 'getting',
+        'action': 'get',
         'data': {
             'id': idMessage
         }
@@ -35,9 +36,8 @@ function getMessagesFromServer() {
 
 function sendMessage() {
     let data = {
-        'messenger': 'sending',
+        'action': 'set',
         'data': {
-            'userName': user,
             'message': $(messageInputField).val()
         }
     };
@@ -60,13 +60,9 @@ function sendMessageToServer() {
 
 function executeServerRequest(data) {
 
-    $.post(PATH_MAIN_CONTROLLER, data, 'json').done(function (json) {
-        let res = JSON.parse(json);
-
-        if (data.messenger === 'getting') {
-            if (!('count' in res) || (res.count === 0)) {
-                returnкак
-            }
+    $.post(MESSENGER_URL, data, 'json').done(function (json) {
+        const res = JSON.parse(json);
+        if (('count' in res) || (res.count > 0)) {
             showMessage(res.list);
         }
     });
@@ -75,9 +71,9 @@ function executeServerRequest(data) {
 function showMessage(messageArray) {
     for (let obj in messageArray) {
         listMessage.push(messageArray[obj]);
-        let time = getTime(messageArray[obj].time);
-        let userName = `<div class="user--name">${messageArray[obj].name}:</div>`;
-        let message = `<div class="message">${getMessage(messageArray[obj].message)}</div>`;
+        const time = getTime(messageArray[obj].time);
+        const userName = `<div class="user--name">${messageArray[obj].name}:</div>`;
+        const message = `<div class="message">${getMessage(messageArray[obj].message)}</div>`;
 
         addMessage(`<div class="box--message bg--color--${indexColor[index]}">${time}${userName}${message}</div>`);
         scrollLastPost();
@@ -94,25 +90,25 @@ function addMessage(string) {
 }
 
 function scrollLastPost() {
-    let lastMessage = document.querySelector(messageList);
+    const lastMessage = document.querySelector(messageList);
     lastMessage.scrollTop = lastMessage.scrollHeight;
 }
 
 function getMessage(msg) {
 
     for (let key of smileArr.keys()) {
-        msg = msg.replace(key, smileArr.get(key));
+        msg = msg.replace(key, `<img class="size--smile" src="${smileArr.get(key)}" >`);
     }
     return msg;
 }
 
 function getTime(time) {
 
-    let date = new Date(time * 1000);
+    const date = new Date(time * 1000);
 
-    let hours = String(date.getHours());
-    let minutes = String(date.getMinutes());
-    let seconds = String(date.getSeconds());
+    const hours = String(date.getHours());
+    const minutes = String(date.getMinutes());
+    const seconds = String(date.getSeconds());
 
     let result = '<div class="time">[';
     result += `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
